@@ -1,7 +1,7 @@
 package io.gitbub.irenenserrano;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,10 +29,10 @@ public final class IrenesFirstPlugin extends JavaPlugin implements Listener{
     //create entities that will represent the player and the attacker
     //make sure attack is not an actual player
     Player player = (Player) event.getEntity();
-    Entity attacker = event.getDamager();
+    Mob attacker = (Mob) event.getDamager();
 
     //if the player is being attacked then generate a message stating so
-    if (player instanceof Player && attacker instanceof Entity)
+    if (player instanceof Player && attacker instanceof Mob)
     {
       //broadcast a message
       Bukkit.broadcastMessage(player + " is being attacked by "+ attacker);
