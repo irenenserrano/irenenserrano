@@ -1,6 +1,7 @@
 package io.gitbub.irenenserrano;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +12,7 @@ public final class IrenesFirstPlugin extends JavaPlugin implements Listener{
   @Override
   public void onEnable() {
     getLogger().info("IrenesFirstPlugin.onEnable has been invoked!");
+    getServer().getPluginManager().registerEvents(this,this);
   }
 
   @Override
@@ -23,13 +25,14 @@ public final class IrenesFirstPlugin extends JavaPlugin implements Listener{
    * @param event EntityDamageByEntityEvent
    */
   @EventHandler
-  public void attackIdentification(EntityDamageByEntityEvent event) {
+  public void attackNotification(EntityDamageByEntityEvent event) {
     //create entities that will represent the player and the attacker
+    //make sure attack is not an actual player
     Player player = (Player) event.getEntity();
-    Player attacker = (Player) event.getDamager();
+    Entity attacker = event.getDamager();
 
     //if the player is being attacked then generate a message stating so
-    if (event.getEntity() instanceof Player && event.getDamager() instanceof Player)
+    if (player instanceof Player && attacker instanceof Entity)
     {
       //broadcast a message
       Bukkit.broadcastMessage(player + " is being attacked by "+ attacker);
